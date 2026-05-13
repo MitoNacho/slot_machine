@@ -1,0 +1,19 @@
+from collections.abc import Generator
+
+from sqlalchemy.orm import Session
+
+from app.database.database import SessionLocal
+
+
+def get_db() -> Generator[Session, None, None]:
+    """
+    Generador de sesiones SQLAlchemy.
+    """
+
+    db = SessionLocal()
+
+    try:
+        yield db
+
+    finally:
+        db.close()
